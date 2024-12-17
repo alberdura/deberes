@@ -1,1 +1,3 @@
-Pagina Banner: https://alberdura.github.io/bannerKK/
+Repositori de diferents pagines de deures:
+
+https://alberdura.github.io/deberes/
