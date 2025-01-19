@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulacio de video</title>
+</head>
+<style>
+        canvas {
+            filter: grayscale(100%);
+        }
+
+        video::cue {
+            color: white;
+            font-size: 30px;
+
+        }
+</style>
+<body> 
+
+<div style="text-align:center"> 
+  <button onclick="playPause()">Play/Pause</button> 
+  <button onclick="makeBig()">Fer Gran</button>
+  <button onclick="makeSmall()">Fer petit</button>
+  <button onclick="makeNormal()">Normal</button>
+  <img style="width: 40px; padding-left: 20px;" src="media/captura.svg" onclick="capturarFotograma()" alt="Capturar Pantalla">
+  <br><br>
+  <video controls poster="media/poster.png" id="video" width="420" height="360">
+    <source src="media/La_Cumbia_del_Marcianito_100%_REAL_no_FEIK.mp4" type="video/mp4">
+    <track src="media/captions/marciano-cat.vtt" label="Català" kind="captions" srclang="es-cat" default>
+    <track src="media/captions/marciano-es.vtt" label="Espanyol" kind="captions" srclang="es">
+  </video>
+</div>
+<br>
+<br>
+
+<div style="text-align: center;">
+<canvas id="canvas" width="420" height="360"></canvas>
+</div>
+
+<script> 
+var myVideo = document.getElementById("video"); 
+
+function playPause() { 
+  if (myVideo.paused) 
+    myVideo.play(); 
+  else 
+    myVideo.pause(); 
+} 
+
+function makeBig() { 
+    myVideo.width = 560; 
+} 
+
+function makeSmall() { 
+    myVideo.width = 320; 
+} 
+
+function makeNormal() { 
+    myVideo.width = 420; 
+} 
+function capturarFotograma() {
+            var video = document.getElementById("video");
+            var canvas = document.getElementById("canvas");
+            var canva = canvas.getContext("2d");
+            canva.drawImage(video, 0, 0, canvas.width, canvas.height);
+        }
+</script> 
+</body> 
+</html>
