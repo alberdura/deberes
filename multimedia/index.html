@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Página multimedia interactiva</title>
+     <link rel="icon" type="image/x-icon" href="media/img/favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .navbar {
+            background-color: #333;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            min-height: 50px;
+        }
+
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        footer a {
+            margin-left: 15px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .galeria {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .galeria img {
+            width: 200px;
+            transition: transform 0.3s;
+        }
+
+        .galeria img:hover {
+            transform: scale(1.1);
+        }
+
+        .audio { 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .anterior {
+            transform: scaleX(-1);
+        }
+        .seguent, .anterior{
+            width: 40px;
+        }
+
+        #audioss, #videoss, #galeriaa{
+            text-align: center;
+            text-decoration: solid;
+            text-decoration: underline;
+        }
+        #canso{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#videoss">Video</a>
+        <a href="#audioss">Audios</a>
+        <a href="#galeriaa">Galería</a>
+    </div>
+
+    <div class="container-content">
+        <h2 id="videoss">Video</h2>
+        <div style="text-align:center"> 
+            <button onclick="playPause()">Play/Pause</button> 
+            <button onclick="makeBig()">Agrandar</button>
+            <button onclick="makeSmall()">Reducir</button>
+            <button onclick="makeNormal()">Normal</button>
+            <br><br>
+            <video id="videoPlayer" width="600" controls>
+                <source src="media/hermanas_batalla.mp4" type="video/mp4">
+                <track src="media/captions/hollow-cat.vtt" label="Català" kind="captions" srclang="es-cat" default>
+                <track src="media/captions/hollow-es.vtt" label="Español" kind="captions" srclang="es">
+                Tu navegador no soporta el video.
+            </video>
+        </div>
+
+        <h2 id="audioss">Audios</h2> 
+        <br> <br>
+        
+        <p id="canso">Tema principal Hollow Knight</p>
+        <div class="audio">
+            <button id="anterior" onclick="anterior()">
+                <img src="media/img/seguent.png" alt="Anterior" class="anterior">
+            </button>
+            <audio id="audioPlayer" controls></audio>
+            <button id="seguent" onclick="seguent()">
+                <img src="media/img/seguent.png" alt="Siguiente" class="seguent">
+            </button>
+        </div>
+        <br>
+        <br>
+        <h2 id="galeriaa">Galería</h2>
+        <section class="galeria">
+            <img src="media/img/hollow.jpg" alt="Imagen Hollow Knight">
+            <img src="media/img/grimm.jpg" alt="Imagen Grimm">
+            <img src="media/img/hornet.jpg" alt="Imagen Hornet">
+            <img src="media/img/mantis.jpg" alt="Imagen Reyes Mantis">
+            <img src="media/img/radiance.jpg" alt="Imagen Radiance">
+        </section>
+    </div>
+
+    <footer>
+        <a href="https://www.youtube.com/watch?v=7xkM8mWC4Kk" target="_blank">Hornet</a>
+        <a href="https://www.youtube.com/watch?v=N8Xr6x92MD0" target="_blank">Main Theme</a>
+        <a href="https://www.youtube.com/watch?v=KDrqmDcCi5c" target="_blank">Hermanas de Batalla</a>
+    </footer>
+
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // CONTROLS DEL VIDEO
+
+            var myVideo = document.getElementById("videoPlayer");
+            window.playPause = function () {
+                if (myVideo.paused) 
+                    myVideo.play(); 
+                else 
+                    myVideo.pause(); 
+            };
+
+            window.makeBig = function () { 
+                myVideo.width = 800; 
+            };
+
+            window.makeSmall = function () { 
+                myVideo.width = 400; 
+            };
+
+            window.makeNormal = function () { 
+                myVideo.width = 600; 
+            };
+    });
+                // CONTROLS DEL AUDIO
+                const cansons = [
+                    "media/audio/main_ost.mp3",
+                    "media/audio/hornet_ost.mp3",
+                    "media/audio/sisters_battle_ost.mp3"
+                ];
+                let cont = 0;
+                let audio = document.getElementById("audioPlayer");
+
+                audio.src = cansons[cont];
+                audio.play();
+
+                // al acabar canço pasar a la seguent
+                audio.addEventListener("ended", function () {
+                    cont++;
+                    if (cont >= cansons.length) {
+                        cont = 0;
+                    }
+                    audio.src = cansons[cont];
+                    audio.play();
+                });
+                // Funcions per cambiar la canço amb els botons
+                function anterior() {
+                    cont--;
+                    if (cont < 0) {
+                        cont = cansons.length - 1;
+                    }
+                    audio.src = cansons[cont];
+                    nomCanso();
+                    audio.play();
+                }
+                function seguent() {
+                    cont++;
+                    if (cont >= cansons.length) {
+                        cont = 0;
+                    }
+                    audio.src = cansons[cont];
+                    nomCanso();
+                    audio.play();
+                }
+
+                function nomCanso(){
+                    let nom = document.getElementById("canso");
+                    const titols = [
+                        "Tema principal Hollow Knight",
+                        "Tema principal de Hornet",
+                        "Tema principal de las Hermanas de Batalla"
+                    ];
+                    nom.textContent = titols[cont];
+                }
+
+                // let nom = document.getElementById("canso");
+                // if (cont == 0) {
+                //     nom.textContent = "Tema principal Hollow Knight";
+                // } else if (cont == 1) {
+                //     nom.textContent = "Tema principal de Hornet";
+                // } else if (cont == 2) {
+                //     nom.textContent = "Tema principal de las Hermanas de Batalla";
+                // }
+    </script>
+</body>
+</html>
