@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creació d’una pàgina accessible per a un esdeveniment cultural">
+    <link rel="stylesheet" href="accesible.css">
+    <title>Esdeveniment Cultural</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#programa">Horari</a></li>
+                <li><a href="#inscripcio">Inscripcio</a></li>
+                <li><a href="#contacte">Contacte</a></li>
+            </ul>
+        </nav>
+        <div class="busqueda">
+            <input placeholder="Cerca">
+            <button style="border: 1px solid #000000;">Cercar</button>
+        </div>
+    </header>
+    
+    <main>
+        <h1 style="text-align: center; color: #123456;">Festival de musica</h1>
+        <section>
+            <h2>Info</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam vero, quaerat fugiat dolore nemo sit 
+                officia repellat odio aperiam. Facilis nobis esse nostrum repellendus officiis veritatis, autem quaerat 
+                sint amet? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores, delectus impedit cumque 
+                eligendi totam tempora alias exercitationem culpa facere illo libero ipsum excepturi quisquam dicta autem 
+                ratione numquam voluptatibus minus? Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum rem quia 
+                nesciunt explicabo alias perspiciatis dolorum, delectus, esse obcaecati vero adipisci facilis dolor earum? 
+                Cumque natus commodi excepturi sunt ipsam!
+            </p>
+
+            <div class="imatges">
+                <img src="img/concert.jpg" alt="Imatge de un concert amb molta gent, tambe es veuen els artistes a l'escenari.">
+                <img src="img/cartel.jpg" alt="Imatge de la cartellera del festival, conte els artistes que hi van i te un estil artistic colorit">
+            </div>
+        </section>
+        
+        <section id="programa">
+            <h2>Horari</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Hora</th>
+                        <th scope="col">Activitat</th>
+                        <th scope="col">Ubicació</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>19:00</td>
+                        <td>Benvinguda</td>
+                        <td>Escenari Principal</td>
+                    </tr>
+                    <tr>
+                        <td>00:00</td>
+                        <td>Concert de Musica</td>
+                        <td>Escenari 2</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Finalització a les 6:00</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+        
+        <section id="inscripcio">
+            <h2>Inscripcio</h2>
+            <form>
+                <fieldset>
+                    <legend>Dades Personals</legend>
+                    <label for="nom">Nom:</label>
+                    <input type="text" id="nom" name="nom" required>
+
+                    <label for="email">Correu electronic:</label>
+                    <input type="email" id="email" name="email" required>
+                </fieldset>
+                <fieldset>
+                    <legend>Tipus d'Entrada</legend>
+                    <label>
+                        <input type="radio" name="entrada" value="general"> General
+                    </label>
+                    <label>
+                        <input type="radio" name="entrada" value="vip"> VIP
+                    </label>
+                </fieldset>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>2025 - Festival de Musica</p>
+        <address id="contacte">Contacte: 12345678 <a href="mailto:info@festivalmusica.cat">info@festivalmusica.cat</a></address>
+    </footer>
+</body>
+</html>
